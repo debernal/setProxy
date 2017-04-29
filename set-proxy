@@ -1,0 +1,5 @@
+echo "Configure proxy, please enter the proxy password:"
+read -s pass
+encodedpass=$(for hex in $(echo -n "$pass" | hexdump -C | head -n 1 | cut -d'|' -f1 | cut -d' ' -f2-100);do echo \%$hex; done | tr -d '\n')
+export http_proxy="http://user%40domain:"$encodedpass"@proxy-ip:port"
+export https_proxy="http://user%40domain:"$encodedpass"@proxy-ip:port"
